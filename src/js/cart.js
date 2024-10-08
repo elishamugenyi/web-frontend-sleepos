@@ -1,5 +1,11 @@
 import { getLocalStorage, setLocalStorage, calculateTotal } from "./utils.mjs"; //imported setlocalstorage and calculatetotal functions.
 
+//button for checkout to redirect to checkout page
+const button1 = document.getElementById("checkout-btn");
+button1.addEventListener("click", () => {
+  window.location.href = "../checkout/index.html";
+});
+
 //render cart contents. Added today Sun 6/Oct
 function renderCartContents() {
   const cartItems = getLocalStorage("so-cart") || []; //added an empty array to compare
