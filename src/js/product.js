@@ -36,6 +36,9 @@ async function addToCartHandler(e) {
   // Call the function to add the product to the cart
   addProductToCart(product);
 
+  //redirect the user to the cart page after adding the product
+  window.location.href = "../cart/index.html";
+
   // Optionally, you can call renderCartContents here if you want to re-render the cart instantly
 }
 
