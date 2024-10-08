@@ -4,6 +4,8 @@ import { defineConfig } from "vite";
 export default defineConfig({
   root: "src/",
 
+  publicDir: "../public", // Ensure that Vite knows where the public directory is located
+
   build: {
     outDir: "../dist",
     rollupOptions: {
