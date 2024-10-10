@@ -1,7 +1,7 @@
 // src/js/checkout.js
 import { getLocalStorage } from "./utils.mjs";
 import CheckoutProcess from "./CheckoutProcess.mjs";
-//import ProductData from "./ProductData.mjs"; // import ProductData function to handle the form submission
+import ProductData from "./ProductData.mjs"; // import ProductData function to handle the form submission
 
 // Retrieve cart data from local storage.
 const cartItems = getLocalStorage("so-cart") || []; //if no data, fallback to an empty array
@@ -10,7 +10,7 @@ const cartItems = getLocalStorage("so-cart") || []; //if no data, fallback to an
 const checkoutProcess = new CheckoutProcess();
 
 //create an instance of ProductData to handle checkout
-//const dataSource = new ProductData("tents");
+const dataSource = new ProductData("tents");
 
 //use transformed data
 const transformedCartItems = cartItems.map((item) => ({
@@ -30,7 +30,7 @@ document.querySelector("[name='zip']").addEventListener("input", (event) => {
     checkoutProcess.displayOrderSummary(transformedCartItems); //also removed "cartItems as argument in the function here"
   }
 });
-/*
+
 // Event listener for form submission
 document.querySelector("#checkoutSubmit").addEventListener("submit", async (event) => {
     // Prevent the default form submission behavior
@@ -39,7 +39,7 @@ document.querySelector("#checkoutSubmit").addEventListener("submit", async (even
     // Collect customer information from the form
     const customerInfo = {
       name: document.querySelector("[name='fname']").value,
-      lname: document.querySelector("[lname='lname']").value,
+      lname: document.querySelector("[name='lname']").value,
       address: document.querySelector("[name='street']").value,
       city: document.querySelector("[name='city']").value,
       state: document.querySelector("[name='state']").value,
@@ -51,7 +51,7 @@ document.querySelector("#checkoutSubmit").addEventListener("submit", async (even
       customer: customerInfo,
       items: transformedCartItems
     };
-  
+
     try {
       // Call the checkout method from ProductData and pass in the order object
       const response = await dataSource.checkout(order);
@@ -66,4 +66,4 @@ document.querySelector("#checkoutSubmit").addEventListener("submit", async (even
       console.error("Checkout failed:", error);
       alert("There was an issue processing your order. Please try again.");
     }
-  }); */
+  }); 

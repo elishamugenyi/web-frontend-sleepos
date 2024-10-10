@@ -10,7 +10,7 @@ export default class ProductData {
   constructor(category) {
     this.category = category;
     this.path = `/json/${this.category}.json`; //removed the '..' ,Update the Path to JSON Files: Change the path to reference the json folder as an absolute path. 
-    //this.checkoutUrl = `https://sleepoutside1.netlify.app/checkout`; //added this production server url
+    this.checkoutUrl = `https://sleepoutside1.netlify.app/checkout`; //added this production server url -Tue 8/Oct
   }
 
   //Fetch data from the local JSON file based on category
@@ -23,9 +23,8 @@ export default class ProductData {
     const products = await this.getData();
     return products.find((item) => item.Id === id);
   }
-}
-/*
-  // Method to send the order object to the server via POST request
+
+  // Method to send the order object to the server via POST request - Tue 8/Oct
   async checkout(order) {
     const options = {
       method: 'POST',
@@ -46,4 +45,7 @@ export default class ProductData {
       throw error; // Re-throw the error for handling in the calling function
     }
   }
+}
+/*
+  To add back async function checkout(order) { all of it, to the last closing bracket in purple, the yellow bracket is for the main function up}
 */

@@ -15,6 +15,9 @@ function renderCartContents() {
   //update cart counter and total amount. Added Sun 6/0ct
   updateCartCounter(cartItems.length);
   updateTotalAmount(calculateTotal(cartItems));
+
+  //Attach event listeners to each "Remove" button- Tue 8/oct
+  attachRemoveEventListeners();
 }
 
 //Template for single cart item- Sun 6/Oct
@@ -36,8 +39,40 @@ function cartItemTemplate(item) {
       <p class="cart-card__color">${item.Colors[0].ColorName}</p>
       <p class="cart-card__quantity">qty: ${quantity}</p>
       <p class="cart-card__price">$${item.FinalPrice}</p>
+      <!-- Added a remove button with data-id attribute -->
+      <span class="remove-item" data-id="${item.Id}">X-Remove</span>
     </li>`;
 }
+
+//function to attach event listeners to each remove button- Tue 8/Oct
+function attachRemoveEventListeners() {
+  // Select all elements with the "remove-item" class
+  const removeButtons = document.querySelectorAll(".remove-item");
+
+  removeButtons.forEach((button) => {
+    // Attach a click event listener to each button
+    button.addEventListener("click", removeFromCart);
+  });
+}
+
+// Function to remove an item from the cart
+function removeFromCart(event) {
+  // Get the ID of the item to be removed from the data-id attribute
+  const itemId = event.target.dataset.id;
+
+  // Retrieve the current cart items from localStorage
+  let cartItems = getLocalStorage("so-cart") || [];
+
+  // Filter out the item to be removed using its ID
+  cartItems = cartItems.filter((item) => item.Id !== itemId);
+
+  // Save the updated cart back to localStorage
+  setLocalStorage("so-cart", cartItems);
+
+  // Re-render the cart to show updated contents
+  renderCartContents();
+}
+//up to here.
 
 // Update cart counter.
 function updateCartCounter(count) {
